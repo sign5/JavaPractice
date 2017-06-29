@@ -4,10 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,8 +58,6 @@ public class AStarController implements Initializable {
     private Button btnCleanMaze;
     @FXML
     private Button btnBeginSearch;
-    @FXML
-    private Button btnResetSearch;
     @FXML
     private AnchorPane rightAnchorPane;
 
@@ -158,7 +152,6 @@ public class AStarController implements Initializable {
         switchMazeStep(0);
     }
 
-    @FXML
     private void resetSearch(ActionEvent event) {
         sliderMazeStep.setValue(0);
         switchMazeStep(0);
@@ -235,14 +228,6 @@ public class AStarController implements Initializable {
         });
     }
 
-    private void autoPlay() {
-        long start = System.nanoTime() / 1000000, tick;
-        for (int i = 0; i <= sliderMazeStep.getMax(); i++) {
-            sliderMazeStep.setValue(i);
-            switchMazeStep(i);
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbSizes.getItems().addAll("10", "15", "30", "45", "60", "90");
@@ -253,10 +238,6 @@ public class AStarController implements Initializable {
             sliderMazeStep.setValue(new_val.intValue());
             switchMazeStep(new_val.intValue());
             lblStepNumber.setText("" + new_val.intValue());
-        });
-
-        btnResetSearch.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
-            autoPlay();
         });
     }
 }
